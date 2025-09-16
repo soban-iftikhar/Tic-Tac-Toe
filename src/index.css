@@ -82,6 +82,92 @@ h1 {
   text-shadow: 0 0 10px #00f7ff;
 }
 
+/* Added neon alert overlay and styling */
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.neon-alert {
+  background-color: #1a1a3a;
+  border: 2px solid #ff00ff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 0 30px #ff00ff, inset 0 0 20px rgba(255, 0, 255, 0.1);
+  animation: slideDown 0.4s ease-out;
+}
+
+.alert-content {
+  text-align: center;
+}
+
+.alert-content h2 {
+  color: #00f7ff;
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff;
+  animation: pulse 2s infinite;
+}
+
+.alert-close {
+  padding: 0.7rem 1.5rem;
+  margin: 0;
+  border: 2px solid #00ff88;
+  border-radius: 15px;
+  background-color: transparent;
+  color: #00ff88;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px #00ff88;
+}
+
+.alert-close:hover {
+  background-color: #00ff88;
+  color: black;
+  box-shadow: 0 0 25px #00ff88, 0 0 35px #00ff88;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff;
+  }
+  50% {
+    text-shadow: 0 0 25px #00f7ff, 0 0 40px #00f7ff, 0 0 50px #00f7ff;
+  }
+}
+
 .row1,
 .row2,
 .row3 {

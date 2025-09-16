@@ -1,9 +1,8 @@
 
-import crossImg from "./assets/cross.svg";
-import circleImg from "./assets/circle.svg";
-"use client"
 
 import { useState, useEffect } from "react"
+import cross from "./assets/cross.svg"
+import circle from "./assets/circle.svg"
 
 const TicTacToe = () => {
   const [data, setData] = useState(["", "", "", "", "", "", "", "", ""])
@@ -12,6 +11,8 @@ const TicTacToe = () => {
   const [gameMode, setGameMode] = useState("2player") // '2player' or 'computer'
   const [difficulty, setDifficulty] = useState("medium") // 'easy', 'medium', 'hard'
   const [winner, setWinner] = useState(null)
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMessage, setAlertMessage] = useState("")
 
   useEffect(() => {
     if (gameMode === "computer" && count % 2 === 1 && !lock && !winner) {
@@ -194,12 +195,12 @@ const TicTacToe = () => {
 
   function setIcon(index) {
     if (data[index] === "x") {
-      return <img src={crossImg} alt="cross" className="w-20 h-20" />
+      return <img src={cross} alt="cross" className="w-20 h-20" />
     }
     if (data[index] === "o") {
-      return <img src={circleImg} alt="circle" className="w-20 h-20" />
+      return <img src={circle} alt="circle" className="w-20 h-20" />
     }
-    return null;
+    return null
   }
 
   function checkWin(board) {
@@ -222,7 +223,8 @@ const TicTacToe = () => {
               ? "You win!"
               : "Computer wins!"
             : `Player ${board[a] === "x" ? 1 : 2} wins!`
-        alert(winnerText)
+        setAlertMessage(winnerText)
+        setShowAlert(true)
         setWinner(board[a])
         setLock(true)
         return
@@ -230,7 +232,8 @@ const TicTacToe = () => {
     }
 
     if (board.every((cell) => cell !== "")) {
-      alert("It's a draw!")
+      setAlertMessage("It's a draw!")
+      setShowAlert(true)
       setLock(true)
     }
   }
@@ -240,12 +243,27 @@ const TicTacToe = () => {
     setCount(0)
     setLock(false)
     setWinner(null)
+    setShowAlert(false)
+    setAlertMessage("")
   }
 
   return (
     <>
       <section className="tictactoe">
         <h1>Tic Tac Toe</h1>
+
+        {showAlert && (
+          <div className="alert-overlay">
+            <div className="neon-alert">
+              <div className="alert-content">
+                <h2>{alertMessage}</h2>
+                <button onClick={() => setShowAlert(false)} className="alert-close">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="mode-selector">
           <button
@@ -270,6 +288,7 @@ const TicTacToe = () => {
 
         {gameMode === "computer" && (
           <div className="difficulty-selector">
+            <span>Difficulty:</span>
             <button
               className={difficulty === "easy" ? "active" : ""}
               onClick={() => {
