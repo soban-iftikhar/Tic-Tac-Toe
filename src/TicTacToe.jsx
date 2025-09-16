@@ -266,6 +266,7 @@ const TicTacToe = () => {
         )}
 
         <div className="mode-selector">
+          <span>Mode:</span>
           <button
             className={gameMode === "2player" ? "active" : ""}
             onClick={() => {

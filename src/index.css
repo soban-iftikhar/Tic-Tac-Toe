@@ -39,7 +39,7 @@ h1 {
   align-items: center;
 }
 
-.difficulty-selector span {
+ span {
   color: #00f7ff;
   margin-right: 0.5rem;
   font-weight: bold;
